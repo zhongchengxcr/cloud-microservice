@@ -26,6 +26,8 @@ public class UserController {
     @Autowired
     private UserDao userDao;
 
+
+
     @GetMapping("/user/{id}")
     private User getUser(@PathVariable Long id) {
         User user = userDao.getOne(id);
