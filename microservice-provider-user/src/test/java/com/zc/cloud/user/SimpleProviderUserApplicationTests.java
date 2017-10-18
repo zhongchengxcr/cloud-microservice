@@ -9,6 +9,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class SimpleProviderUserApplicationTests {
 
+	ThreadLocal<String> path = ThreadLocal.withInitial(() -> "path");
+
 	@Test
 	public void contextLoads() {
 	}

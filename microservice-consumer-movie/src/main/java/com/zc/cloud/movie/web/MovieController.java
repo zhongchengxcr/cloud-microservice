@@ -1,8 +1,11 @@
 package com.zc.cloud.movie.web;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.zc.cloud.movie.feign.UserApi;
 import com.zc.cloud.movie.vo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,9 +33,27 @@ public class MovieController {
     @Value("${remote.user.url}")
     private String getUserUrl;
 
+    @Autowired
+    private UserApi userApi;
+
+    //@HystrixCommand(fallbackMethod = "defaultStores")
     @GetMapping("/movie/{id}")
-    public User movie(@PathVariable Long id){
-        User user = restTemplate.getForObject(getUserUrl+id,User.class);
+    public User movie(@PathVariable Long id) {
+        User user = userApi.getUser(id);
         return user;
+    }
+
+    @GetMapping("/movie/port")
+    public String port() {
+        String port = userApi.port();
+        return port;
+    }
+
+    public User defaultStores(Long id) {
+        User u = new User();
+        u.setName("xxxxx");
+        u.setAge(999);
+        u.setUsername("yyyyyy");
+        return u;
     }
 }
