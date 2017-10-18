@@ -1,5 +1,8 @@
 package com.zc.cloud.movie.web;
 
+import com.netflix.appinfo.InstanceInfo;
+import com.netflix.discovery.EurekaClient;
+import com.zc.cloud.movie.feign.UserApi;
 import com.zc.cloud.movie.vo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,6 +36,10 @@ public class MovieController {
     @Value("${remote.user.url}")
     private String getUserUrl;
 
+    @SuppressWarnings("all")
+    @Autowired
+    private UserApi userApi;
+
     @GetMapping("eureka/instance")
     public String serviceUrl() {
         InstanceInfo instance = discoveryClient.getNextServerFromEureka("microservice-consumer-movie", false);
@@ -47,7 +54,6 @@ public class MovieController {
     public User movie(@PathVariable Long id){
 
 
-        System.out.println("provider-user :"+loadBalanced.choose("microservice-provider-user").getPort());
 
         User user = restTemplate.getForObject("http://microservice-provider-user/user/"+id,User.class);
         return user;
