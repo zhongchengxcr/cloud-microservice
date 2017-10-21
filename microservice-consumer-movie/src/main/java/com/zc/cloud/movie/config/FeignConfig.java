@@ -2,6 +2,7 @@ package com.zc.cloud.movie.config;
 
 import com.netflix.loadbalancer.IRule;
 import com.netflix.loadbalancer.RandomRule;
+import feign.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.context.annotation.Bean;
@@ -20,14 +21,11 @@ import org.springframework.context.annotation.Configuration;
  * @version 1.0.0
  */
 //@Configuration
-public class RibbonConfig {
-
-    @Autowired
-    private LoadBalancerClient loadBalanced;
+public class FeignConfig {
 
     @Bean
-    public IRule iRule() {
-        return new RandomRule();
+    Logger.Level feignLoggerLevel() {
+        return Logger.Level.FULL;
     }
 
 }

@@ -2,6 +2,7 @@ package com.zc.cloud.movie;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
@@ -26,8 +27,8 @@ import org.springframework.web.client.RestTemplate;
 
 
 
-@EnableHystrix
-//@EnableCircuitBreaker
+//@EnableHystrix
+@EnableCircuitBreaker
 @EnableHystrixDashboard
 @EnableFeignClients
 @EnableEurekaClient

@@ -1,5 +1,6 @@
 package com.zc.cloud.order.feign;
 
+import com.zc.cloud.config.FeignClientConfiguration;
 import com.zc.cloud.order.feign.hystrix.UserHystrix;
 import com.zc.cloud.order.vo.User;
 import org.springframework.cloud.netflix.feign.FeignClient;
@@ -19,7 +20,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author zhongcheng_m@yeah.net
  * @version 1.0.0
  */
-@FeignClient(value = "user01", fallback = UserHystrix.class)
+@FeignClient(value = "microservice-provider-user", fallback = UserHystrix.class)
+//@FeignClient(value = "user01", fallback = UserHystrix.class)
 public interface UserApi {
 
 

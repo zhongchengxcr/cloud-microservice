@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  * @author zhongcheng_m@yeah.net
  * @version 1.0.0
  */
-@Component
+//@Component
 public class UserHystrix implements UserApi {
     @Override
     public User getUser(Long id) {
@@ -29,6 +29,6 @@ public class UserHystrix implements UserApi {
 
     @Override
     public String port() {
-        return null;
+        return "1234";
     }
 }

@@ -18,7 +18,6 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
  * @version 1.0.0
  */
 @EnableZuulProxy
-@EnableEurekaClient
 @SpringBootApplication
 public class MicroserviceGetWayApplication {
 
